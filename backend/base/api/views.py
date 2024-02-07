@@ -5,6 +5,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from ..models import Product
 from .serializers import ProductSerializer
+from django.shortcuts import render
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
