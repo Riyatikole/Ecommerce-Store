@@ -1,31 +1,29 @@
 import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { thunk } from 'redux-thunk';
-import { productListReducer } from './reducers/productReducers';
+import { productListReducer, productDetailsReducer } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 
 const rootReducer = combineReducers({
-    productList: productListReducer,
-    cart: cartReducer,
+  productList: productListReducer,
+  productDetails: productDetailsReducer,
+  cart: cartReducer,
 });
 
-
-  const cartItemsFromStorage = localStorage.getItem('cartItems') ?
-    JSON.parse(localStorage.getItem('cartItems')) : []
-
- 
-
+const cartItemsFromStorage = localStorage.getItem('cartItems')
+  ? JSON.parse(localStorage.getItem('cartItems'))
+  : [];
 
 const initialState = {
-  cart:{cartItems: cartItemsFromStorage}
+  cart: { cartItems: cartItemsFromStorage }, // Ensure correct nesting
 };
 
-const middleware = [thunk]; // Use 'thunk' directly
+const middleware = (getDefaultMiddleware) =>
+  getDefaultMiddleware().concat([thunk]);
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(middleware),
+  middleware,
   preloadedState: initialState,
 });
 

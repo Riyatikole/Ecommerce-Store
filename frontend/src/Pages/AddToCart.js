@@ -5,19 +5,19 @@ import Message from '../components/Message';
 import { addToCart } from '../actions/cartActions';
 
 function AddToCart() {
-  //   const productId = useParams();
-  //   const location = useLocation(); 
-  //   const qty = new URLSearchParams(location.search).get('qty'); 
-  //   const dispatch = useDispatch()
+    const productId = useParams();
+    const location = useLocation(); 
+    const qty = new URLSearchParams(location.search).get('qty'); 
+    const dispatch = useDispatch()
 
-  //   const cart = useSelector(state => state.cart)
-  //   const {cartItems} = cart
+    const cart = useSelector(state => state.cart)
+    const {cartItems} = cart
 
-  //   useEffect(() => {
-  //       if(productId){
-  //           dispatch(addToCart(productId, qty))
-  //       }
-  //   },[dispatch, productId, qty])
+    useEffect(() => {
+        if(productId){
+            dispatch(addToCart(productId, qty))
+        }
+    },[dispatch, productId, qty])
     
   return (
     <div>
