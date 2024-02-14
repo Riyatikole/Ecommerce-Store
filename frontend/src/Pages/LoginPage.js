@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
 import AuthContext from '../context/AuthContext'
 import {Link} from 'react-router-dom'
+import CheckoutSteps from '../components/CheckoutSteps';
 
 import {
   Typography,
@@ -16,6 +17,7 @@ const LoginPage = () => {
 
   let {loginUser} = useContext(AuthContext)
   return (
+    <><CheckoutSteps step1/>
     <Grid
       container
       component="main"
@@ -45,8 +47,7 @@ const LoginPage = () => {
               label="Email Address"
               name="username"
               autoComplete="username"
-              autoFocus
-            />
+              autoFocus />
             <TextField
               variant="outlined"
               margin="normal"
@@ -56,13 +57,11 @@ const LoginPage = () => {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
-            />
+              autoComplete="current-password" />
           </Grid>
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+            label="Remember me" />
           <Grid>
             <Button
               type="submit"
@@ -91,7 +90,7 @@ const LoginPage = () => {
           </Grid>
         </form>
       </Grid>
-    </Grid>
+    </Grid></>
   );
 };
 

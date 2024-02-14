@@ -14,8 +14,14 @@ const cartItemsFromStorage = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems'))
   : [];
 
+  const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
+  ? JSON.parse(localStorage.getItem('shippingAddress'))
+  : [];  
+
 const initialState = {
-  cart: { cartItems: cartItemsFromStorage }, // Ensure correct nesting
+  cart: { cartItems: cartItemsFromStorage, 
+  shippingAddress: shippingAddressFromStorage },
+  
 };
 
 const middleware = (getDefaultMiddleware) =>

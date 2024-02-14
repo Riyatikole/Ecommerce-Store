@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
+import { FormControl, InputLabel, Select, MenuItem, Button, Grid } from '@mui/material';
 
 function ProductDetail({ match }) {
     const { id } = useParams();
@@ -38,37 +38,37 @@ function ProductDetail({ match }) {
       }
 
 
-  return (
-    <div>
-        <Link to = '/'> Go Back </Link>
-        {productData.name}
-
-        <div>
-        <FormControl fullWidth>
-  <InputLabel id="demo-simple-select-label">Age</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={qty}
-    label="Age"
-    onChange={handleChange}
-  >
-    <MenuItem value={1}>1</MenuItem>
-    <MenuItem value={2}>2</MenuItem>
-    <MenuItem value={3}>3</MenuItem>
-  </Select>
-</FormControl>
-        </div>
-        <div>
-        <Button variant="contained" 
-        disableElevation
-        onClick={handleAddToCart}>
-  Add to Cart
-</Button>
-        </div>
-      
-    </div>
-  )
+      return (
+        <Grid container spacing={2}>
+            <Grid item xs={6} mt={4}>
+                <Link to="/"> Go Back </Link>
+                <h2>{productData.name}</h2>
+            </Grid>
+            <Grid item xs={6} mt={4}>
+                <FormControl fullWidth>
+                    <InputLabel id="qty-select-label">Quantity</InputLabel>
+                    <Select
+                        labelId="qty-select-label"
+                        id="qty-select"
+                        value={qty}
+                        onChange={handleChange}
+                        label="Quantity"
+                    >
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                    </Select>
+                </FormControl>
+                <Button
+                    variant="contained"
+                    disableElevation
+                    onClick={handleAddToCart}
+                >
+                    Add to Cart
+                </Button>
+            </Grid>
+        </Grid>
+    );
 }
 
 export default ProductDetail
