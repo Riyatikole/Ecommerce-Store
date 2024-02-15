@@ -8,8 +8,7 @@ import { Link } from 'react-router-dom';
 function PlaceOrderPage() {
     const cart = useSelector(state => state.cart);
 
-    cart.itemPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)
-    cart.shippingPrice = (cart.itemPrice > 1000 ? 0 : 10).toFixed(2)
+
 
     const handlePlaceOrder = () => {
         console.log("place order")
@@ -51,7 +50,7 @@ function PlaceOrderPage() {
                             ))}
                         </Grid>
                     )}
-                    {cart.itemPrice}
+                    {/* {cart.itemPrice} */}
                      <Button type="submit"
                      disabled={cart.cartItems === 0}
                      onClick={handlePlaceOrder}>Place Order</Button>

@@ -13,4 +13,5 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('products/',views.getProducts, name="products"),
     path('product/<str:pk>',views.getProduct, name="product"),
+    path('orders/add/',views.createOrder, name="new_order"),
 ]
