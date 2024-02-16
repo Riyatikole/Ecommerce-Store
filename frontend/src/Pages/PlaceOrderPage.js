@@ -1,16 +1,37 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Grid, Button } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import CheckoutSteps from '../components/CheckoutSteps';
 import Message from '../components/Message';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createOrder } from '../actions/orderActions'; 
 
 function PlaceOrderPage() {
+
+    const history = useNavigate()
+
+    const orderCreate = useSelector(state => state.orderCreate)
+    console.log(orderCreate)
+    // const [order, error, success] = orderCreate
+    const order = orderCreate.order;
+    const error = orderCreate.error;
+    const success = orderCreate.success;
+
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart);
 
+    useEffect(()=>{
+        if(!cart.paymentMethod){
+            history('/payment')
+        }
+    },[cart])
+    
 
+    useEffect(()=> {
+        if(success){
+            history(`/order/${order._id}`)
+        }
+    },[success])
 
     const handlePlaceOrder = () => {
         // console.log(cart.paymentMethod)
@@ -23,6 +44,8 @@ function PlaceOrderPage() {
             totalPrice: 346,
             shippingPrice: 5.00
         }))
+
+        
     }
 
     return (
@@ -61,6 +84,7 @@ function PlaceOrderPage() {
                             ))}
                         </Grid>
                     )}
+                    {/* {error && <Message variant='danger'>{error}</Message>} */}
                     {/* {cart.itemPrice} */}
                      <Button type="submit"
                      disabled={cart.cartItems === 0}
