@@ -46,8 +46,11 @@ def getProduct(request, pk):
 
 @api_view(['POST'])
 def createOrder(request):
+    if not request.user.is_authenticated:
+        return Response({'detail': 'User is not authenticated'}, status=status.HTTP_401_UNAUTHORIZED)
     user=request.user
     data=request.data
+    
     
     orderItems=data['orderItems']
 
@@ -78,7 +81,7 @@ def createOrder(request):
                 product=product,
                 order=order,
                 name=product.name,
-                quantity=i['quantity'],
+                quantity=i['qty'],
                 price=i['price'],
                 image=product.image.url,
             )

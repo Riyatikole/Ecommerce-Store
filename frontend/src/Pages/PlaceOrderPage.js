@@ -1,17 +1,28 @@
 import React from 'react';
 import { Grid, Button } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CheckoutSteps from '../components/CheckoutSteps';
 import Message from '../components/Message';
 import { Link } from 'react-router-dom';
+import { createOrder } from '../actions/orderActions'; 
 
 function PlaceOrderPage() {
+    const dispatch = useDispatch()
     const cart = useSelector(state => state.cart);
 
 
 
     const handlePlaceOrder = () => {
-        console.log("place order")
+        // console.log(cart.paymentMethod)
+        dispatch(createOrder({
+            orderItems: cart.cartItems,
+            shippingAddress: cart.shippingAddress,
+            paymentMethod: cart.paymentMethod,
+            itemPrice: 2.09,
+            taxPrice: 3.0,
+            totalPrice: 346,
+            shippingPrice: 5.00
+        }))
     }
 
     return (
