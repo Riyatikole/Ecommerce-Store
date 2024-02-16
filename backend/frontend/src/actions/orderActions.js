@@ -65,7 +65,7 @@ export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
             type: ORDER_PAY_SUCCESS,
             payload: data,
           });
-s
+
     } catch (error) {
         dispatch({
           type: ORDER_PAY_FAIL,
