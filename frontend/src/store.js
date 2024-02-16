@@ -3,13 +3,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { thunk } from 'redux-thunk';
 import { productListReducer, productDetailsReducer } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
-import { orderCreateReducer } from './reducers/orderReducers';
+import { orderCreateReducer, orderPayReducer } from './reducers/orderReducers';
 
 const rootReducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
   cart: cartReducer,
-  orderCreate: orderCreateReducer
+  orderCreate: orderCreateReducer,
+  ordePay: orderPayReducer
 });
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')

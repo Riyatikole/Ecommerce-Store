@@ -7,6 +7,7 @@ from ..models import Product, Order, ShippingAddress, OrderItem
 from .serializers import ProductSerializer, OrderSerializer
 from django.shortcuts import render
 from rest_framework import status
+from datetime import datetime
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -95,3 +96,17 @@ def createOrder(request):
     serializer = OrderSerializer(order, many=False)
     return Response(serializer.data)
    
+
+@api_view(['GET'])
+def getOrderById(request, pk):
+    user = request.user
+    order=Order.objects.get(_id=pk)
+
+@api_view(['PUT'])
+def updateOrderToPaid(request, pk):
+    order = Order.objects.get(_id=pk)
+
+    order.isPaid = True
+    order.paidAt = datetime.now()
+    order.save()
+    return Response("order was paid")
